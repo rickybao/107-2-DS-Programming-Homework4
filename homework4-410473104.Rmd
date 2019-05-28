@@ -183,6 +183,8 @@ df_validCommitsSubsample
 
 ```{r ans113}
 # validCounts
+length(unique(df_validCommitsSubsample$date)) -> validCounts
+validCounts
 ```
 
 ### 1.14 不重覆有效commit次數查詢函數
