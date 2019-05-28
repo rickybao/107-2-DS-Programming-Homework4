@@ -53,6 +53,8 @@ commitHistory <- content(GET("https://api.github.com/repos/r-hub/cranlogs/commit
 請由commitHistory取出第10個元素，並存在答案物件oneCommitRecord。
 ```{r ans101}
 # oneCommitRecord
+commitHistory[[10]] -> oneCommitRecord
+oneCommitRecord
 ```
 
 
@@ -71,18 +73,33 @@ commitHistory <- content(GET("https://api.github.com/repos/r-hub/cranlogs/commit
 
 ```{r ans102}
 # df_commit
+oneCommitRecord[["commit"]][["author"]][["name"]] -> ocan
+oneCommitRecord[["commit"]][["committer"]][["name"]] -> occn
+oneCommitRecord[["commit"]][["committer"]][["date"]] -> occd
+oneCommitRecord[["sha"]] -> os
+list(author=ocan, commiter=occn, commitDate=occd, sha=os) -> l10
+as.data.frame(l10) -> df_commit
+df_commit
 ```
 
 ### 1.3 寫成函數
 請創造一個答案函數物件叫commit_df_fun, 其input為oneCommitRecord, output為df_commit。最後一行請寫commit_df_fun, 不要加`()`
 ```{r ans103}
 # commit_df_fun
+commit_df_fun  <- function(x){
+  oneCommitRecord[[x]] -> df_commit
+  return(df_commit)
+}
+commit_df_fun
 ```
 
 ### 1.4 產生完整data frame
 使用作業3的2.4小題所提及的purrr套件之`map_dfr()`函數，將commitHistory的所有30筆資料轉成與1.2小題df_commit一樣欄位名稱但有30筆資料的data fram答案物件df_allCommits, 最後一行請寫df_allCommits
 ```{r ans104}
 # df_allCommits
+map_dfr(.commitHistory, .commit$author$name, .commit$committer$name, .commit$committer$date, .sha, .id=NULL) -> mdch
+as.data.frame(mach) -> df_allCommits
+df_allCommits
 ```
 
 ### 1.5 留下個人完成的commit
