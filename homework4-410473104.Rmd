@@ -107,7 +107,8 @@ df_allCommits
 
 ```{r ans105}
 # df_allCommits$
-df_allCommits$author == df_allCommits$commiter -> df_allCommits$samePerson
+df_allCommits$author == df_allCommits$commiter -> samePerson
+df_allCommits$samePerson <- samePerson
 df_allCommits$samePerson
 ```
 
@@ -116,6 +117,8 @@ df_allCommits$samePerson
 
 ```{r ans106}
 # df_validCommits
+map(df_allCommits, ~.[c(samePerson)]) -> df_validCommits
+df_validCommits
 ```
 
 ### 1.7 日期
