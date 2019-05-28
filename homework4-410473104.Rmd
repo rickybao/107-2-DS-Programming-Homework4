@@ -125,12 +125,17 @@ df_validCommits
 df_validCommits中的commitDate為UTC時區表示的時間"字串"，請將它轉成以"Asia/Taipei"時區顯示的POSIXct class資料，最後一行請打答案物件df_validCommits$commitDate。
 ```{r ans107}
 # df_validCommits$commitDate
+with_tz(ymd_hms(df_validCommits$commitDate), tzone="Asia/Taipei") -> df_validCommits$commitDate
+df_validCommits$commitDate
 ```
 
 ### 1.8 hh變數
 請由`df_validCommits$commitDate`中取出台灣時區的小時數（0-23間）存在`df_validCommits$hh`中，其class為integer，最後一行請打df_validCommits$hh。
 ```{r ans108}
 # df_validCommits$hh
+hour(df_validCommits$commitDate) -> hh
+hh -> df_validCommits$hh
+df_validCommits$hh
 ```
 
 ### 1.9 date變數
@@ -138,6 +143,9 @@ df_validCommits中的commitDate為UTC時區表示的時間"字串"，請將它�
 
 ```{r ans109}
 # df_validCommits$date
+date(df_validCommits$commitDate) -> date
+date -> df_validCommits$date
+df_validCommits$date
 ```
 
 ### 1.10 weekday變數
@@ -145,6 +153,9 @@ df_validCommits中的commitDate為UTC時區表示的時間"字串"，請將它�
 
 ```{r ans110}
 # df_validCommits$weekday
+wday(df_validCommits$date) -> weekday
+as.integer(weekday) -> df_validCommits$weekday
+df_validCommits$weekday
 ```
 
 ### 1.11 星期一到三且12-23
